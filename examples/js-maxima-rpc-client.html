@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset='utf-8'" />
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/datagraph/jquery-jsonrpc/master/jquery.jsonrpc.js"></script>
+    
+    <title>Maxima json rpc example</title>
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.jsonRPC.setup({
+        endPoint: '/jsonrpc',
+        namespace: ''
+      });
+      $("input#evaluate").click(function() {
+        $.jsonRPC.request('evaluate', {
+          params: [$("textarea#input").val()],
+          success: function(data) {
+            $("<p />").text(data.result).appendTo($("p#result"));
+          },
+          error: function(data) {
+            $("<p />").text(data.error.message).appendTo($("p#result"));
+          }
+        });
+      });
+    });
+    </script>
+  </head>
+  <body>
+    <p id="result"></p>
+    <p><textarea name="input" id="input"></textarea></p>
+    <p><input name="evaluate" id="evaluate" value="evaluate" type="button"/></p>
+  </body>
+</html>

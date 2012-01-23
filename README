@@ -1,0 +1,30 @@
+maxima-json-rpc provide API for evaluating maxima expression through HTTP POST JSON-RPC. *Isolated* multiuser accesing is not possible now.
+
+Licence: MIT
+
+Author: Michael Filonenko <filonenko.mikhail at gmail dot com>
+
+Depends on:
+  embeddable-maxima
+  restas
+  cl-json
+
+Usage:
+  git clone ...
+  sbcl
+    (pushnew "/path/to/maxima-json-rpc/" asdf:*central-registry*)
+    (pushnew "/path/to/embeddable-maxima/" asdf:*central-registry*)
+    (ql:quickload :maxima-json-rpc)
+    (restas:start :maxima-json-rpc :port 9090)
+
+
+PHP example using JSON-RPC PHP http://jsonrpcphp.org:
+<?php
+  require_once 'jsonRPCClient.php';
+  $maxima = new jsonRPCClient('http://127.0.0.1:9090/jsonrpc');
+  print "Maxima evaluator\n";
+  print "Evaluate ratsimp(x^2 + 2*x + 1 - (x + 1)^2)\n"
+  print $maxima->evaluate("ratsimp(x^2 + 2*x + 1 - (x + 1)^2)");
+?>
+
+See examples/ for javascript/jquery/jquery-json-rpc example.
