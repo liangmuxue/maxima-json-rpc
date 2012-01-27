@@ -40,10 +40,3 @@
 (define-route example ("example")
    (merge-pathnames "examples/js-maxima-rpc-client.html" (asdf:component-pathname (asdf:find-system :maxima-json-rpc))))
 
-;;;;;
-(defun new-test (x y z)
-  "Some test functions"
-  (do ((j 0 (1+ j)))
-      ((< 10 j) j)
-    (print j)))
-            
